@@ -18,11 +18,7 @@ public:
   Faculty();
   Faculty(int idNum, string nome, string nivel, GenLinkedList<int> *sList);
   Faculty(int idNum, string nome, string nivel);
-  Faculty(const Faculty &stupidcopyconstructor);
   ~Faculty();
-
-  void deepCopy(const Faculty &stupidcopyconstructor);
-  Faculty& operator=(const Faculty &stupidcopyconstructor);
 
   void setStudentList(string stlist);
   bool searchStudentList(int id);
@@ -53,22 +49,7 @@ Faculty::Faculty(int idNum, string nome, string nivel){
   level = nivel;
   studentList = new GenLinkedList<int>();
 }
-Faculty::Faculty(const Faculty &stupidcopyconstructor) {
-  deepCopy(stupidcopyconstructor);
-}
 Faculty::~Faculty(){
-}
-
-void Faculty::deepCopy(const Faculty &stupidcopyconstructor) {
-  id = stupidcopyconstructor.id;
-  name = stupidcopyconstructor.name;
-  level = stupidcopyconstructor.level;
-  studentList = stupidcopyconstructor.studentList;
-}
-
-Faculty& Faculty::operator=(const Faculty &stupidcopyconstructor) {
-  if (this != &stupidcopyconstructor) deepCopy(stupidcopyconstructor);    // check for self-assignment before doing deep copy
-  return *this;
 }
 
 void Faculty::setStudentList(string stlist){
@@ -84,19 +65,20 @@ void Faculty::setStudentList(string stlist){
   }
 }
 
+//Returns true if student ID is found in studentList
 bool Faculty::searchStudentList(int id){
   for (int i = 0; i < studentList->size; i++){
     if (studentList->getElement(i) == id) return true;
   }
   return false;
 }
-
+//Adds student to studentList
 void Faculty::addAdvisee(int studID){
   if (!searchStudentList(studID)){
     studentList->insertBack(studID);
   }
 }
-
+//Removes student from studentList
 void Faculty::removeAdvisee(int studID){
   studentList->remove(studID);
 }
@@ -113,7 +95,7 @@ bool Faculty::operator > (Faculty facu){
 bool Faculty::operator < (Faculty facu){
   return (id < facu.id);
 }
-
+//Displays faculty data
 void Faculty::displayData(){
   cout << "Faculty ID: " << id << endl;
   cout << "Faculty Name: " << name << endl;
@@ -123,7 +105,7 @@ void Faculty::displayData(){
     cout << studentList->getElement(i) << endl;
   }
 }
-
+//Converts faculty tree to standard txt output
 string Faculty::serialize(){
   string serialized = "faculty:" + std::to_string(id) + ":" + name + ":" + level;
   for (int i = 0; i < studentList->getSize(); i++){

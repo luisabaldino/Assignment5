@@ -1,5 +1,5 @@
-student:20:Luisa:Sophomore:57
-student:15:Beatriz:Freshman:49
-student:18:Bella:Senior:49
-student:53:Adri:SuperSenior:80
-student:40:Mimi:Linda:49
+student:40:Mimi:SuperSenior:3.78:49
+student:18:Bella:Senior:4.00:49
+student:15:Beatriz:Freshman:4.00:57
+student:20:Luisa:Sophomore:4.00:57
+student:53:Adri:SuperSenior:4.00:80

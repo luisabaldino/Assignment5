@@ -93,12 +93,15 @@ void Database::insert(string treeType, int id, string name, string level){
 
       if (treeType == "Student"){
         int facultyID;
+        double gpa;
         bool go = true;
         while (go) {
+          cout << "Insert the student's GPA: " << endl;
+          cin >> gpa;
           cout << "Insert the student's faculty advisor's ID: " << endl;
           cin >> facultyID;
           if (refIntCheck("Faculty",facultyID)){
-            Student stud(id,name,level,facultyID);
+            Student stud(id,name,level,gpa,facultyID);
             // Insert the student record, keep rollback info
             studentTree->insert(stud);
             rb->store(group,"insert","Student",stud);
@@ -162,7 +165,6 @@ void Database::deletePerson(string treeType, int id){
 
       if (treeType == "Student"){
         Student stud = studentTree->retrieve(id);
-        cout << stud.facultyID << endl;
         Faculty facu = facultyTree->retrieve(stud.facultyID);
         GenLinkedList<int> *tempStudList = new GenLinkedList<int>();
         for (int i = 0 ; i < facu.studentList->getSize() ; i++){

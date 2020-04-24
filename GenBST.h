@@ -10,7 +10,6 @@ class GenBST{
 public:
   GenBST();
   ~GenBST();
-  //virtual ~GenBST()
 
   void insert (T value);
   bool personSearch(int id);
@@ -29,7 +28,6 @@ public:
   void saveTree(string fileName);
   void saveAllNodes(ofstream& outFile, TreeNode<T> *node);
 
-//private:
   TreeNode<T> *root;
 };
 template <class T>
@@ -38,7 +36,6 @@ GenBST<T>::GenBST(){
 }
 template <class T>
 GenBST<T>::~GenBST(){
-  //diy
 }
 template <class T>
 void GenBST<T>::printTree(TreeNode<T> *node){
@@ -115,6 +112,7 @@ void GenBST<T>::insert(T value){
   }
 }
 template <class T>
+//Returns true if object is found in tree
 bool GenBST<T>::search(T value){
   if(isEmpty()) return false;
   else {
@@ -131,9 +129,10 @@ bool GenBST<T>::search(T value){
   }
   return true;
 }
-
+//Returns true if id is found in Person Tree
 template <class T>
 bool GenBST<T>::personSearch(int id){
+  //Assumes a tree with int instance variable "id"
   if(isEmpty()) return false;
   else {
     //not an empty Tree
@@ -254,7 +253,7 @@ TreeNode<T>* GenBST<T>::getSuccessor(TreeNode<T> *d){
   }
   return successor;
 }
-
+//Saves tree info to given txt file
 template <class T>
 void GenBST<T>::saveTree(string fileName){
   //saveTree presumes all node objects have a serialize function
@@ -267,7 +266,7 @@ void GenBST<T>::saveTree(string fileName){
   }
   outFile.close();
 }
-
+//For each node in tree, calls serialize function for node object
 template <class T>
 void GenBST<T>::saveAllNodes(ofstream& outFile, TreeNode<T> *node) {
   //saveAllNodes presumes all node objects have a serialize function

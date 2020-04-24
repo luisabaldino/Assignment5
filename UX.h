@@ -5,6 +5,7 @@
 #include "GenBST.h"
 #include <fstream>
 #include <string.h>
+#include <stdlib.h>
 using namespace std;
 
 class UX{
@@ -155,6 +156,7 @@ void UX::loadDB(string fileName){
   string line;
   inFile.open(fileName + ".txt");
   while (!inFile.eof()){
+    //For each line in given file, read info & store in variables
     getline(inFile,line);
     if(line.length()==0)break;
     int size = line.length();
@@ -172,9 +174,12 @@ void UX::loadDB(string fileName){
 
     if (treeType == "student"){
       token = strtok(NULL,":");
+      double gpa = std::stod(token);
+      cout << gpa << endl;
+      token = strtok(NULL,":");
       int facuID = std::stoi(token);
       // here we have all info to create a student
-      Student stud(id,name,level,facuID);
+      Student stud(id,name,level,gpa,facuID);
       masterStudent->insert(stud);
     } else if (treeType == "faculty"){
       string studIDs = "";

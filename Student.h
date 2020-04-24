@@ -11,15 +11,12 @@ public:
   int id;
   string name;
   string level;
+  double gpa;
   int facultyID;
 
   Student();
-  Student(int idNum, string nome, string nivel, int fID);
-  Student(const Student &stupidcopyconstructor);
+  Student(int idNum, string nome, string nivel,double nota, int fID);
   ~Student();
-
-  void deepCopy(const Student &stupidcopyconstructor);
-  Student& operator=(const Student &stupidcopyconstructor);
 
   int getFacultyID();
   void setFacultyID(int id);
@@ -35,7 +32,6 @@ public:
 };
 
 Student::Student(){
-
 }
 
 int Student::getFacultyID(){
@@ -46,30 +42,15 @@ void Student::setFacultyID(int id){
   facultyID = id;
 }
 
-Student::Student(int idNum, string nome, string nivel, int fID){
+Student::Student(int idNum, string nome, string nivel,double nota, int fID){
   id = idNum;
   name = nome;
   level = nivel;
+  gpa = nota;
   facultyID = fID;
 }
 
-Student::Student(const Student &stupidcopyconstructor) {
-  deepCopy(stupidcopyconstructor);
-};
-
 Student::~Student(){
-}
-
-void Student::deepCopy(const Student &stupidcopyconstructor) {
-  id = stupidcopyconstructor.id;
-  name = stupidcopyconstructor.name;
-  level = stupidcopyconstructor.level;
-  facultyID = stupidcopyconstructor.facultyID;
-}
-
-Student& Student::operator=(const Student &stupidcopyconstructor) {
-  if (this != &stupidcopyconstructor) deepCopy(stupidcopyconstructor);    // check for self-assignment before doing deep copy
-  return *this;
 }
 
 bool Student::operator==(Student stud){
@@ -84,15 +65,16 @@ bool Student::operator > (Student stud){
 bool Student::operator < (Student stud){
   return (id < stud.id);
 }
-
+//Displays all student information
 void Student::displayData(){
   cout << "Student ID: " << id << endl;
   cout << "Student Name: " << name << endl;
   cout << "Student Level: " << level << endl;
+  cout << "Student GPA: " << gpa << endl;
   cout << "Student Faculty ID: " << facultyID << endl;
 }
-
+//Converts student tree to standard txt output
 string Student::serialize(){
-  string serialized = "student:" + std::to_string(id) + ":" + name + ":" + level + ":" + std::to_string(facultyID) + "\n";
+  string serialized = "student:" + std::to_string(id) + ":" + name + ":" + level + ":" + std::to_string(gpa) + ":" + std::to_string(facultyID) + "\n";
   return serialized;
 }

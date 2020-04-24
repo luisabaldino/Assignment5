@@ -1,0 +1,3 @@
+faculty:49:Silvia:Mother:15:18:40
+faculty:57:Eduardo:Father:20
+faculty:80:Zoila:Grandma:53
